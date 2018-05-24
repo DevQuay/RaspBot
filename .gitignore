@@ -36,3 +36,15 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+
+#eclipse stuffs
+/.classpath
+/.project
+/.settings/
+/eclipse/
+.metadata
+/*.launch
+RaspBot/RpiBot/.settings/org.eclipse.buildship.core.prefs
+RaspBot/RpiBot/.project
+RaspBot/RpiBot/.classpath
+RaspBot/RpiBot/gradle/wrapper/gradle-wrapper.properties
