@@ -16,13 +16,13 @@ import net.dv8tion.jda.core.entities.User;
 public class BotLogger {
 	static void loged(User messenger, String messaged, MessageChannel chanel, Guild guilded) {
 		File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
-		String path = jarDir.getAbsolutePath() + "/Logs/" + guilded.getId();
+		String path = jarDir.getAbsolutePath() + "/Logs/" + guilded.getId()+"/"+chanel.getName();
 		if (messenger.isBot()) {
 			return;
 		}
 		String timeStamp = new SimpleDateFormat("dd/MM/yy @ HH:mm").format(Calendar.getInstance().getTime());
 		String timeStamp2 = new SimpleDateFormat("dd_MM_yy").format(Calendar.getInstance().getTime());
-		String log = "[" + timeStamp + "][" + guilded.getName() + "]" + messenger.getName() + ":" + messaged + "\r\n";
+		String log = "[" + timeStamp + "][" + guilded.getName() + "]" + "[" + chanel.getName() + "]" + messenger.getName() + ":" + messaged + "\r\n";
 		System.out.printf("%s", log);
 			try {
 				Files.createDirectories(Paths.get(path));
