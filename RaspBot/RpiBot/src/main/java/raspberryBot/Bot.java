@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.security.auth.login.LoginException;
@@ -89,16 +91,37 @@ public class Bot implements EventListener {
 				Message message = null;
 				chanel.sendFile(fileloc, "Yeet.png", message).queue();
 				BotLogger.loged(messenger, messaged, chanel, guilded);
-			} else if (messaged.toLowerCase().equals("!addemote")) {
+
+			} else if (messaged.toLowerCase().equals("!addemote local")) {
 				Attachment attatch = words.getAttachments().get(0);
 				String Filename = attatch.getFileName();
-				String Path = pathe + "Big/" + Filename + "/";
-				File fileloc = new File(Path);
-				attatch.download(fileloc);
-				chanel.sendMessage("Emote Added Successfully!").queue();
+				String Path = pathe + "Big/" + guilded.getId() + "/";
+				String Path2 = Path + Filename;
+				try {
+					Files.createDirectories(Paths.get(Path));
+					File fileloc = new File(Path2);
+					attatch.download(fileloc);
+					chanel.sendMessage("Local Emote Added Successfully!").queue();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				BotLogger.loged(messenger, messaged, chanel, guilded);
-				System.out.println("Emote Added!");
+
+			} else if (messaged.toLowerCase().equals("!addemote global")) {
+				Attachment attatch = words.getAttachments().get(0);
+				String Filename = attatch.getFileName();
+				String Path = pathe + "Big/global/";
+				String Path2 = Path + Filename;
+				try {
+					Files.createDirectories(Paths.get(Path));
+					File fileloc = new File(Path2);
+					attatch.download(fileloc);
+					chanel.sendMessage("Global Emote Added Successfully!").queue();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				BotLogger.loged(messenger, messaged, chanel, guilded);
+
 			} else if (messaged.toLowerCase().equals("free mp3")) {
 				File fileloc = new File(pathe + "FreeMP3.png");
 				Message message = null;
@@ -136,6 +159,7 @@ public class Bot implements EventListener {
 				Downloader.Download(chanel, words, pathe);
 				BotLogger.loged(messenger, messaged, chanel, guilded);
 			} else {
+				EmoteScanner.ScanGlobalEmotes(messenger, messaged, chanel, pathe, guilded, words);
 				EmoteScanner.ScanEmotes(messenger, messaged, chanel, path, guilded, words);
 				BotLogger.loged(messenger, messaged, chanel, guilded);
 			}
