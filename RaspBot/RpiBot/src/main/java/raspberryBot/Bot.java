@@ -102,7 +102,7 @@ public class Bot implements EventListener {
 					File fileloc = new File(Path2);
 					attatch.download(fileloc);
 					chanel.sendMessage("Local Emote Added Successfully!").queue();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				BotLogger.loged(messenger, messaged, chanel, guilded);
@@ -117,7 +117,7 @@ public class Bot implements EventListener {
 					File fileloc = new File(Path2);
 					attatch.download(fileloc);
 					chanel.sendMessage("Global Emote Added Successfully!").queue();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				BotLogger.loged(messenger, messaged, chanel, guilded);
@@ -159,8 +159,13 @@ public class Bot implements EventListener {
 				Downloader.Download(chanel, words, pathe);
 				BotLogger.loged(messenger, messaged, chanel, guilded);
 			} else {
-				EmoteScanner.ScanGlobalEmotes(messenger, messaged, chanel, pathe, guilded, words);
+				try {
+				EmoteScanner.ScanGlobalEmotes(messenger, messaged, chanel, path, guilded, words);
 				EmoteScanner.ScanEmotes(messenger, messaged, chanel, path, guilded, words);
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
 				BotLogger.loged(messenger, messaged, chanel, guilded);
 			}
 		}
