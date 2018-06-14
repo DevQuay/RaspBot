@@ -159,14 +159,17 @@ public class Bot implements EventListener {
 				Downloader.Download(chanel, words, pathe);
 				BotLogger.loged(messenger, messaged, chanel, guilded);
 			} else {
-				try {
-				EmoteScanner.ScanGlobalEmotes(messenger, messaged, chanel, path, guilded, words);
-				EmoteScanner.ScanEmotes(messenger, messaged, chanel, path, guilded, words);
+				if (messenger.isBot()) {
+					return;
+				} else {
+					try {
+						EmoteScanner.ScanGlobalEmotes(messenger, messaged, chanel, path, guilded, words);
+						EmoteScanner.ScanEmotes(messenger, messaged, chanel, path, guilded, words);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					BotLogger.loged(messenger, messaged, chanel, guilded);
 				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
-				BotLogger.loged(messenger, messaged, chanel, guilded);
 			}
 		}
 	}
