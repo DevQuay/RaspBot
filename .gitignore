@@ -45,8 +45,6 @@ gradle-app.setting
 .metadata
 /*.launch
 RaspBot/RpiBot/.settings/org.eclipse.buildship.core.prefs
-RaspBot/RpiBot/.project
-RaspBot/RpiBot/.classpath
 RaspBot/RpiBot/gradle/wrapper/gradle-wrapper.properties
 RaspBot/.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_0.fdt
 *.fdx
