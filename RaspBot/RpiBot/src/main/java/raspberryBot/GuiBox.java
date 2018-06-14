@@ -1,25 +1,31 @@
 package raspberryBot;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.security.auth.login.LoginException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.SwingConstants;
+
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
 
 public class GuiBox {
 
 	private JFrame frmVersbot;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws LoginException, RateLimitedException, InterruptedException, IOException {
+		Bot.main(args);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,9 +50,10 @@ public class GuiBox {
 	 */
 	private void initialize() {
 		frmVersbot = new JFrame();
+		frmVersbot.setVisible(true);
 		frmVersbot.setTitle("Vers-Bot");
 		frmVersbot.setIconImage(
-				Toolkit.getDefaultToolkit().getImage(GuiBox.class.getResource("/resources/icon/NewerIcon.ico")));
+				Toolkit.getDefaultToolkit().getImage(GuiBox.class.getResource("/resources/icon/DoseyProfB8.png")));
 		frmVersbot.setBounds(100, 100, 450, 300);
 		frmVersbot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVersbot.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -58,29 +65,62 @@ public class GuiBox {
 			}
 		});
 		frmVersbot.getContentPane().add(btnExitBot);
-
 		JMenuBar menuBar = new JMenuBar();
 		frmVersbot.setJMenuBar(menuBar);
-		
-		JMenu mnFiles = new JMenu("Files");
-		menuBar.add(mnFiles);
-		
-		JButton btnGlobalEmotes = new JButton("Emotes");
-		btnGlobalEmotes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
+
+		JMenu mnFolders = new JMenu("Folders");
+		mnFolders.setActionCommand("Folders");
+		menuBar.add(mnFolders);
+
+		JButton btnLogs = new JButton("Logs");
+		btnLogs.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnLogs.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		JMenuItem mntmLogs = new JMenuItem("Logs");
+		mnFolders.add(mntmLogs);
+		mntmLogs.addActionListener(new ActionListener() {
+			File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+			String Basepath = jarDir.getAbsolutePath() + "/";
+			String LogPath = Basepath + "Logs/";
+			File LogDir = new File(LogPath);
+			Desktop desktop = null;
+
+			public void actionPerformed(ActionEvent e) {
+				if (Desktop.isDesktopSupported()) {
+					desktop = Desktop.getDesktop();
+					try {
+						desktop.open(LogDir);
+					} catch (IOException f) {
+
+					}
+				} else {
+					System.out.println("desktop is not supported");
+				}
 			}
 		});
-		btnGlobalEmotes.setPreferredSize(new Dimension(100, 35));
-		btnGlobalEmotes.setSize(new Dimension(100, 30));
-		mnFiles.add(btnGlobalEmotes);
-		
-		JButton btnNewButton = new JButton("Logs");
-		btnNewButton.setSize(new Dimension(100, 30));
-		btnNewButton.setMaximumSize(new Dimension(100, 35));
-		btnNewButton.setMinimumSize(new Dimension(100, 35));
-		btnNewButton.setPreferredSize(new Dimension(100, 35));
-		mnFiles.add(btnNewButton);
+		mnFolders.add(mntmLogs);
+		JMenuItem mntmEmotes = new JMenuItem("Emotes");
+		mnFolders.add(mntmEmotes);
+		mntmLogs.addActionListener(new ActionListener() {
+			File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+			String Basepath = jarDir.getAbsolutePath() + "/";
+			String EmotePath = Basepath + "Emotes/";
+			File EmoteDir = new File(EmotePath);
 
+			public void actionPerformed(ActionEvent Emotes) {
+				Desktop desktop = null;
+				if (Desktop.isDesktopSupported()) {
+					desktop = Desktop.getDesktop();
+					try {
+						desktop.open(EmoteDir);
+					} catch (IOException e) {
+
+					}
+				} else {
+					System.out.println("desktop is not supported");
+				}
+			}
+		});
+		mnFolders.add(mntmLogs);
 	}
 }

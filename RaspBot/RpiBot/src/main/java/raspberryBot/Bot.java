@@ -29,7 +29,11 @@ import net.dv8tion.jda.core.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.dv8tion.jda.core.hooks.EventListener;
 
+
 public class Bot implements EventListener {
+	File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+	String path = jarDir.getAbsolutePath() + "/";
+	String pathe = path + "Emotes/";
 	public static void main(String[] args)
 			throws LoginException, RateLimitedException, InterruptedException, IOException {
 		File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
@@ -38,15 +42,10 @@ public class Bot implements EventListener {
 		String token = FileUtils.readFileToString(input, Charset.defaultCharset());
 		new JDABuilder(AccountType.BOT).setToken(token).addEventListener(new Bot()).buildBlocking();
 	}
-
 	static Boolean reacted = false;
 	static String messageid = "test value";
-
 	@Override
 	public void onEvent(Event event) {
-		File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
-		String path = jarDir.getAbsolutePath() + "/";
-		String pathe = path + "Emotes/";
 		if (event instanceof ReadyEvent) {
 			String writePath = path + "StartLog.txt";
 			System.out.println("API is ready!");
