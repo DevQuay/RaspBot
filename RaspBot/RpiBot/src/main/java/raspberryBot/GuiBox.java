@@ -24,8 +24,15 @@ public class GuiBox {
 
 	private JFrame frmVersbot;
 
-	public static void main(String[] args) throws LoginException, RateLimitedException, InterruptedException, IOException {
-		Bot.main(args);
+	public static void main(String[] args)
+			 {
+		new Thread(() -> {
+			try {
+				Bot.main(args);
+			} catch (LoginException | RateLimitedException | InterruptedException | IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,7 +61,7 @@ public class GuiBox {
 		frmVersbot.setTitle("Vers-Bot");
 		frmVersbot.setIconImage(
 				Toolkit.getDefaultToolkit().getImage(GuiBox.class.getResource("/resources/icon/DoseyProfB8.png")));
-		frmVersbot.setBounds(100, 100, 450, 300);
+		frmVersbot.setBounds(100, 100, 400, 200);
 		frmVersbot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVersbot.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -85,7 +92,7 @@ public class GuiBox {
 			File LogDir = new File(LogPath);
 			Desktop desktop = null;
 
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent Logs) {
 				if (Desktop.isDesktopSupported()) {
 					desktop = Desktop.getDesktop();
 					try {
@@ -101,12 +108,11 @@ public class GuiBox {
 		mnFolders.add(mntmLogs);
 		JMenuItem mntmEmotes = new JMenuItem("Emotes");
 		mnFolders.add(mntmEmotes);
-		mntmLogs.addActionListener(new ActionListener() {
+		mntmEmotes.addActionListener(new ActionListener() {
 			File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
 			String Basepath = jarDir.getAbsolutePath() + "/";
 			String EmotePath = Basepath + "Emotes/";
 			File EmoteDir = new File(EmotePath);
-
 			public void actionPerformed(ActionEvent Emotes) {
 				Desktop desktop = null;
 				if (Desktop.isDesktopSupported()) {

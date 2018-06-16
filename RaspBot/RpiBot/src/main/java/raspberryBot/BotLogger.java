@@ -14,24 +14,26 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
 
 public class BotLogger {
-	static void loged(User messenger, String messaged, MessageChannel chanel, Guild guilded) {
+	public static void loged(User messenger, String messaged, MessageChannel chanel, Guild guilded) {
+		// TODO Auto-generated method stub
 		File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
-		String path = jarDir.getAbsolutePath() + "/Logs/" + guilded.getId()+"/"+chanel.getName();
+		String path = jarDir.getAbsolutePath() + "/Logs/" + guilded.getId() + "/" + chanel.getName();
 		if (messenger.isBot()) {
 			return;
 		}
 		String timeStamp = new SimpleDateFormat("dd/MM/yy @ HH:mm").format(Calendar.getInstance().getTime());
 		String timeStamp2 = new SimpleDateFormat("dd_MM_yy").format(Calendar.getInstance().getTime());
-		String log = "[" + timeStamp + "][" + guilded.getName() + "]" + "[" + chanel.getName() + "]" + messenger.getName() + ":" + messaged + "\r\n";
+		String log = "[" + timeStamp + "][" + guilded.getName() + "]" + "[" + chanel.getName() + "]"
+				+ messenger.getName() + ":" + messaged + "\r\n";
 		System.out.printf("%s", log);
-			try {
-				Files.createDirectories(Paths.get(path));
-				String writePath = path + "/" + "Log" + "_" + timeStamp2 + ".txt";
-				BufferedWriter out = new BufferedWriter(new FileWriter(writePath, true));
-				out.write(log);
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			Files.createDirectories(Paths.get(path));
+			String writePath = path + "/" + "Log" + "_" + timeStamp2 + ".txt";
+			BufferedWriter out = new BufferedWriter(new FileWriter(writePath, true));
+			out.write(log);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
