@@ -35,7 +35,7 @@ gradle-app.setting
 .gradletasknamecache
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
-!gradle/wrapper/gradle-wrapper.properties
+# gradle/wrapper/gradle-wrapper.properties
 
 #eclipse stuffs
 /.classpath
@@ -45,7 +45,6 @@ gradle-app.setting
 .metadata
 /*.launch
 RaspBot/RpiBot/.settings/org.eclipse.buildship.core.prefs
-RaspBot/RpiBot/gradle/wrapper/gradle-wrapper.properties
 RaspBot/.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/_0.fdt
 *.fdx
 *.fnm
