@@ -15,6 +15,7 @@ import org.apache.commons.io.FileUtils;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.MessageReaction.ReactionEmote;
@@ -79,8 +80,9 @@ public class Bot implements EventListener {
 			Guild guilded = ((MessageReceivedEvent) event).getGuild();
 			String messaged = ((MessageReceivedEvent) event).getMessage().getContentDisplay();
 			Message words = ((MessageReceivedEvent) event).getMessage();
+			Member mnember = ((MessageReceivedEvent) event).getMember();
 			LocalCommands.removeLater(messaged, chanel, guilded, messenger, new File(pathe), words);
-			TextCommands.addTextCommands(messaged, chanel, guilded, messenger, words);
+			TextCommands.addTextCommands(messaged, chanel, guilded, messenger, words, mnember);
 			EmoteAdder.addEmoteCommands(messaged, chanel, guilded, messenger, new File(pathe), words);
 			if (messaged.toLowerCase().equals("!dl") && messenger.getId().equals("257943503269527552")
 					&& guilded.getId().equals("348935653976965120")) {

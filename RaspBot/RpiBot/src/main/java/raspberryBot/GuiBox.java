@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -59,8 +58,6 @@ public class GuiBox {
 		frmVersbot = new JFrame();
 		frmVersbot.setVisible(true);
 		frmVersbot.setTitle("Vers-Bot");
-		frmVersbot.setIconImage(
-				Toolkit.getDefaultToolkit().getImage(GuiBox.class.getResource("/resources/icon/DoseyProfB8.png")));
 		frmVersbot.setBounds(100, 100, 400, 200);
 		frmVersbot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmVersbot.getContentPane().setLayout(new BorderLayout(0, 0));
