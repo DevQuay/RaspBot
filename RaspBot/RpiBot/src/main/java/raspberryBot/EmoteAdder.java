@@ -16,7 +16,7 @@ public class EmoteAdder {
 		if (messaged.toLowerCase().equals("!addemote local")) {
 			Attachment attatch = words.getAttachments().get(0);
 			String Filename = attatch.getFileName();
-			String Path = fileIn + "Big/" + guilded.getId() + "/";
+			String Path = fileIn + "/Big/" + guilded.getId() + "/";
 			String Path2 = Path + Filename;
 			try {
 				Files.createDirectories(Paths.get(Path));
@@ -30,7 +30,7 @@ public class EmoteAdder {
 		} else if (messaged.toLowerCase().equals("!addemote global")) {
 			Attachment attatch = words.getAttachments().get(0);
 			String Filename = attatch.getFileName();
-			String Path = fileIn + "Big/global/";
+			String Path = fileIn + "/Big/global/";
 			String Path2 = Path + Filename;
 			try {
 				Files.createDirectories(Paths.get(Path));
